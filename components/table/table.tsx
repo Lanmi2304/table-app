@@ -7,6 +7,7 @@ import {
 import { useState } from "react";
 import mainData from "@/data/data1.json";
 import { columns } from "./columns";
+import { cn } from "@/lib/utils";
 
 export function Table() {
   const [data, _setData] = useState(() => [...mainData]);
@@ -19,8 +20,8 @@ export function Table() {
 
   return (
     <div className="p-2">
-      <table className={cn}>
-        <thead>
+      <table className={cn("w-[98vw] text-white bg-gray-800 rounded-md ")}>
+        <thead className={cn("text-slate-400")}>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
@@ -40,7 +41,7 @@ export function Table() {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td key={cell.id} className={cn("text-center")}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
