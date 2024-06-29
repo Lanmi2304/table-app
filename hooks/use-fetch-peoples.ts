@@ -21,11 +21,11 @@ export function useFetch() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resData: Users = await ky
+      const resData: { data: Users[] } = await ky
         .get("https://cam-kitty.vercel.app/api/admin/hosts")
         .json();
-      //   if (resData) setNewData(resData.data);
-      console.log(resData.data);
+
+      setNewData(resData.data);
 
       //   try {
       //     const response = await fetch(

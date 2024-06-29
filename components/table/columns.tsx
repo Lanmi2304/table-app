@@ -27,28 +27,34 @@ export const columns = [
   columnHelper.accessor("rating", {
     header: "Rating",
     // id: "lastName",
-    // cell: (info) => info.getValue(),
+    cell: (info) => info.getValue(),
     // footer: (info) => info.column.id,
   }),
   columnHelper.accessor("guestsCount", {
     header: "Guests",
-    // cell: (info) => info.renderValue(),
+    cell: (info) => info.getValue(),
     // footer: (info) => info.column.id,
   }),
   columnHelper.accessor("roomId", {
     header: "Room Id",
+    cell: (info) => info.getValue(),
     // footer: (info) => info.column.id,
   }),
   columnHelper.accessor("roomPrice", {
     header: "Room Price",
+    cell: (info) => info.getValue(),
     // footer: (info) => info.column.id,
   }),
   columnHelper.accessor("status", {
     header: "Status",
+    cell: (info) => info.getValue(),
+
     // footer: (info) => info.column.id,
   }),
   columnHelper.accessor("isToyOnline", {
     header: "Toy Online",
+    cell: (info) => info.renderValue(),
+
     // footer: (info) => info.column.id,
   }),
 ];
