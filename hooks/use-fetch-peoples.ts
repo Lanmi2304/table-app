@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ky from "ky";
 
-export type Users = {
+export type User = {
   id: number;
   rating: number;
   guestsCount: number;
@@ -15,13 +15,13 @@ export type Users = {
 };
 
 export function useFetch() {
-  const [newData, setNewData] = useState<Users[]>([]);
+  const [newData, setNewData] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      const resData: { data: Users[] } = await ky
+      const resData: { data: User[] } = await ky
         .get("https://cam-kitty.vercel.app/api/admin/hosts")
         .json();
 

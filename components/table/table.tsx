@@ -5,18 +5,18 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // import mainData from "@/data/data1.json";
 import { columns } from "./columns";
 import { cn } from "@/lib/utils";
 import { useFetch } from "@/hooks/use-fetch-peoples";
-import { type Users } from "@/hooks/use-fetch-peoples";
+import { type User } from "@/hooks/use-fetch-peoples";
+import { AsideCTX } from "@/context/table-ctx";
 
 export function Table() {
-  const [data, setData] = useState<Users[]>([]);
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const [data, setData] = useState<User[]>([]);
+  const { setActive, setHost } = useContext(AsideCTX);
   const { newData } = useFetch();
-  console.log(newData);
 
   useEffect(() => {
     setData(newData);
@@ -26,11 +26,12 @@ export function Table() {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    onRowSelectionChange: setRowSelection, //hoist up the row selection state to your own scope
-    state: {
-      rowSelection, //pass the row selection state back to the table instance
-    },
   });
+
+  const hostPreviewHandler = (host: User) => {
+    setActive();
+    setHost(host);
+  };
   // console.log(rowSelection);
   return (
     <>
@@ -57,7 +58,7 @@ export function Table() {
               {table.getRowModel().rows.map((row) => (
                 <tr
                   key={row.id}
-                  onClick={() => console.log(row.original)} // <---
+                  onClick={() => hostPreviewHandler(row.original)} // <---
                 >
                   {row.getVisibleCells().map((cell) => (
                     <td key={cell.id} className={cn("text-center")}>

@@ -1,5 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { type Users } from "@/hooks/use-fetch-peoples";
+import { type User } from "@/hooks/use-fetch-peoples";
 
 // type Person = {
 //   id: string;
@@ -11,7 +11,7 @@ import { type Users } from "@/hooks/use-fetch-peoples";
 //   progress: number;
 // };
 
-const columnHelper = createColumnHelper<Users>();
+const columnHelper = createColumnHelper<User>();
 
 export const columns = [
   columnHelper.accessor("id", {
