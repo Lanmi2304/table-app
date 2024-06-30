@@ -11,7 +11,7 @@ type PropsType = {
 
 export const DialogContent = forwardRef<HTMLDivElement, PropsType>(
   ({ children, label, ...props }, forwardedRef) => {
-    const { setActive, showAside } = useContext(AsideCTX);
+    const { setActive } = useContext(AsideCTX);
     return (
       <div>
         <DialogPrimitive.Portal>
@@ -27,17 +27,19 @@ export const DialogContent = forwardRef<HTMLDivElement, PropsType>(
             onEscapeKeyDown={() => setActive(false)}
             onInteractOutside={() => setActive(false)}
             className={cn(
-              "data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-[10%] w-96 right-4 bg-info-host rounded-md"
+              "data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-32 w-96 right-0 bg-info-host rounded-md"
             )}
           >
-            <DialogPrimitive.DialogTitle className="text-center text-white hidden">
+            <DialogPrimitive.DialogTitle className="hidden">
               {label}
             </DialogPrimitive.DialogTitle>
             {children}
             <DialogPrimitive.Close
               aria-label="Close"
               onClick={() => setActive(false)}
-              className="absolute top-2 size-4 left-2 z-40 text-white hover:text-gray-800"
+              className={cn(
+                "absolute top-2 size-4 left-2 z-40 text-white hover:text-gray-800"
+              )}
             >
               <Cross1Icon className="size-9 font-bold" />
             </DialogPrimitive.Close>

@@ -10,7 +10,7 @@ export const DialogComponent = ({ host }: { host: User | undefined }) => {
   const { showAside } = useContext(AsideCTX);
   if (!host) return;
 
-  const { id, nickname, image, rating, roomId, roomPrice, status } = host;
+  const { nickname, image, rating, roomId, roomPrice, status } = host;
 
   return (
     <Dialog open={showAside}>

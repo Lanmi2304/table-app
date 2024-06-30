@@ -17,7 +17,8 @@ export type User = {
 export function useFetch() {
   const [newData, setNewData] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+
+  // Missing error state <--
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,10 +27,11 @@ export function useFetch() {
         .json();
 
       setNewData(resData.data);
+      setLoading(false);
     };
 
     fetchData();
   }, []);
 
-  return { newData };
+  return { newData, loading, setLoading };
 }
