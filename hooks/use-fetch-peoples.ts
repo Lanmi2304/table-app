@@ -26,18 +26,6 @@ export function useFetch() {
         .json();
 
       setNewData(resData.data);
-
-      //   try {
-      //     const response = await fetch(
-      //       "https://cam-kitty.vercel.app/api/admin/hosts"
-      //     );
-      //     if (!response.ok) throw new Error(response.statusText);
-
-      //     const resData = await response.json();
-      //     setNewData(resData.data);
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
     };
 
     fetchData();

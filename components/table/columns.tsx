@@ -1,5 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { type User } from "@/hooks/use-fetch-peoples";
+import { cn } from "@/lib/utils";
 
 // type Person = {
 //   id: string;
@@ -47,13 +48,15 @@ export const columns = [
   }),
   columnHelper.accessor("status", {
     header: "Status",
-    cell: (info) => info.getValue(),
-
-    // footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("isToyOnline", {
-    header: "Toy Online",
-    cell: (info) => info.renderValue(),
+    cell: (info) => (
+      <span
+        className={cn(
+          info.getValue() === "ONLINE" ? "text-green-500" : "text-red-400"
+        )}
+      >
+        {info.getValue()}
+      </span>
+    ),
 
     // footer: (info) => info.column.id,
   }),

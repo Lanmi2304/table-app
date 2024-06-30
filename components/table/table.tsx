@@ -1,6 +1,5 @@
 "use client";
 import {
-  RowSelectionState,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -29,16 +28,21 @@ export function Table() {
   });
 
   const hostPreviewHandler = (host: User) => {
-    setActive();
+    setActive(true);
     setHost(host);
   };
-  // console.log(rowSelection);
+
   return (
     <>
+      <div className="h-96">dsadas</div>
       {data && (
-        <div className="p-2">
-          <table className={cn("w-[98vw] text-white bg-gray-800 rounded-md ")}>
-            <thead className={cn("text-table-h-text bg-table-h")}>
+        <div className="relative w-[80dvw] mx-auto">
+          <table
+            className={cn(
+              "absolute w-full text-white bg-table-data rounded-md "
+            )}
+          >
+            <thead className={cn("sticky top-0 text-table-h-text bg-table-h")}>
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
@@ -88,7 +92,7 @@ export function Table() {
               ))}
             </tfoot>
           </table>
-          <div className="h-4" />
+          {/* <div className="h-4" /> */}
         </div>
       )}
     </>

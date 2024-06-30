@@ -5,14 +5,14 @@ import { User } from "@/hooks/use-fetch-peoples";
 
 type CTXValueType = {
   showAside: boolean;
-  setActive: () => void;
+  setActive: (active: boolean) => void;
   setHost: (host: User) => void;
   selectedHost: User | undefined;
 };
 
 export const AsideCTX = createContext<CTXValueType>({
   showAside: false,
-  setActive: () => {},
+  setActive: (active: boolean) => {},
   setHost: (host: User) => {},
   selectedHost: undefined,
 });
@@ -25,8 +25,8 @@ export default function AsideCTXProvider({
   const [showAside, setShowAside] = useState(false);
   const [selectedHost, setSelectedHost] = useState<User | undefined>(undefined);
 
-  const setActive = () => {
-    setShowAside(true);
+  const setActive = (active: boolean) => {
+    setShowAside(active);
   };
 
   const setHost = (host: User) => {
