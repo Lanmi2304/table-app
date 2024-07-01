@@ -27,7 +27,7 @@ export const DialogContent = forwardRef<HTMLDivElement, PropsType>(
             onEscapeKeyDown={() => setActive(false)}
             onInteractOutside={() => setActive(false)}
             className={cn(
-              "data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-32 w-96 right-0 bg-info-host rounded-md"
+              "data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-26 w-96 right-0 bg-info-host rounded-md"
             )}
           >
             <DialogPrimitive.DialogTitle className="hidden">

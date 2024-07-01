@@ -7,9 +7,13 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { columns } from "./columns";
 import { cn } from "@/lib/utils";
-import { useFetch } from "@/hooks/use-fetch-peoples";
+// import { useFetch } from "@/hooks/use-fetch-peoples";
 import { type User } from "@/hooks/use-fetch-peoples";
 import { AsideCTX } from "@/context/table-ctx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import axios from "axios";
 
 const LoadingRow = () => (
   <tr>
@@ -18,18 +22,23 @@ const LoadingRow = () => (
     </td>
   </tr>
 );
+const queryClient = new QueryClient();
 
 export function Table() {
-  const [data, setData] = useState<User[]>([]);
+  const [initData, setInitData] = useState<User[]>([]);
   const { setActive, setHost } = useContext(AsideCTX);
-  const { newData, loading } = useFetch();
 
-  useEffect(() => {
-    setData(newData);
-  }, [newData]);
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ["hosts"],
+    queryFn: () => {
+      axios.get("https://cam-kitty.vercel.app/api/admin/hosts").then((res) => {
+        setInitData(res.data.data);
+      });
+    },
+  });
 
   const table = useReactTable({
-    data,
+    data: initData,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -63,7 +72,7 @@ export function Table() {
             ))}
           </thead>
           <tbody>
-            {loading ? (
+            {isFetching ? (
               <LoadingRow />
             ) : (
               table.getRowModel().rows.map((row) => (
