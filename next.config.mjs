@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
 
-const imageHostnames = JSON.parse(process.env.NEXT_PUBLIC_IMAGE_HOSTNAMES);
 const nextConfig = {
   images: {
-    domains: [...imageHostnames],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i*.imlmediahub.com",
+      },
+    ],
   },
 };
 
