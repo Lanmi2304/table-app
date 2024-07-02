@@ -13,6 +13,9 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      dropShadow: {
+        "3xl": "0 4px 4px rgba(0, 0, 0, 0.3)",
+      },
     },
     colors: {
       ...require("tailwindcss/colors"),
@@ -20,6 +23,10 @@ const config: Config = {
       "table-h-text": "#d0d0d0",
       "table-data": "#18181b",
       "info-host": "#161515",
+      "table-border": "#232326",
+      "main-bg": "#09090b;",
+      "online-color": "#12b981",
+      "toy-off-bg": "#2f1d20",
     },
     keyframes: {
       overlayShow: {

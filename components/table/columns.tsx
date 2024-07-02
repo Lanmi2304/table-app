@@ -21,7 +21,7 @@ export const columns = [
           alt="host_img"
           width={20}
           height={18}
-          className="rounded-[50%] mr-2"
+          className="rounded-[100%] mr-2"
         />
         {info.getValue()}
       </div>
@@ -61,12 +61,26 @@ export const columns = [
       <span
         className={cn(
           info.getValue() === "ONLINE"
-            ? "text-green-600 p-1 bg-green-950 rounded-md border-2 border-green-800"
+            ? "text-online-color py-1 px-2 bg-green-950 rounded-lg border border-green-800 font-bold"
             : "text-blue-600 p-1 bg-blue-950 rounded-md border-2 border-blue-800"
         )}
       >
         {info.getValue().slice(0, 1).toUpperCase() +
           info.getValue().slice(1).toLowerCase()}
+      </span>
+    ),
+  }),
+  columnHelper.accessor("isToyOnline", {
+    header: "Toy Online",
+    cell: (info) => (
+      <span
+        className={cn(
+          info.getValue() === true
+            ? "text-online-color py-1 px-2 bg-green-950 rounded-lg border border-green-800 font-bold"
+            : "text-red-400 py-1 px-2 bg-toy-off-bg rounded-md border border-red-800 font-bold"
+        )}
+      >
+        {info.getValue() === true ? "Yes" : "No"}
       </span>
     ),
   }),

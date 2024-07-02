@@ -48,7 +48,6 @@ export function Table() {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
-    //no need to pass pageCount or rowCount with client-side pagination as it is calculated automatically
     state: {
       pagination,
     },
@@ -61,59 +60,65 @@ export function Table() {
 
   return (
     <>
-      <div className="h-10"></div>
-
-      <table
-        className={cn(
-          "w-[50dvw] mx-auto mb-9 text-white bg-table-data text-sm rounded-xl overflow-hidden"
-        )}
-      >
-        <thead
+      <div className="rounded-2xl mt-60 mb-20">
+        <table
           className={cn(
-            "sticky top-0 text-table-h-text bg-table-h truncate text-left"
+            "w-[50dvw] mx-auto staic text-white bg-table-data text-sm rounded-xl"
           )}
         >
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} className="p-2">
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody className="">
-          {isFetching ? (
-            <LoadingRow />
-          ) : (
-            table.getRowModel().rows.map((row) => (
-              <tr key={row.id} onClick={() => hostPreviewHandler(row.original)}>
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    className="text-left h-6 border-b-2 border-b-slate-800 p-2"
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
+          <thead
+            className={cn(
+              "sticky top-[180px] text-table-h-text bg-table-h truncate text-left rounded-2xl drop-shadow-3xl"
+            )}
+          >
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id} className="rounded-2xl shadow-2xl">
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id} className="p-2 rounded-t-xl">
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </th>
                 ))}
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody className="">
+            {isFetching ? (
+              <LoadingRow />
+            ) : (
+              table.getRowModel().rows.map((row) => (
+                <tr
+                  className="h-6 border-b border-b-table-border first:border-t first:border-t-table-border last:border-none"
+                  key={row.id}
+                  onClick={() => hostPreviewHandler(row.original)}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id} className="text-left p-2 ">
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
       <select
+        className="mb-20"
         value={table.getState().pagination.pageSize}
         onChange={(e) => {
           table.setPageSize(Number(e.target.value));
         }}
       >
-        {[10, 20, 30, 40, 50].map((pageSize) => (
+        {[10, 20, 30, 40, 50, 100].map((pageSize) => (
           <option key={pageSize} value={pageSize}>
             Show {pageSize}
           </option>

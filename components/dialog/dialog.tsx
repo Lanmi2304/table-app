@@ -16,17 +16,24 @@ export const DialogComponent = ({ host }: { host: User | undefined }) => {
     <Dialog open={showAside}>
       <DialogTrigger className={cn("hidden")}>Dialog trigger</DialogTrigger>
       <DialogContent label="About host">
-        <div>
+        <div className="h-screen">
           <Image src={image} alt="host-picture" width={600} height={200} />
-          <div className="flex items-center justify-center gap-4 text-white pt-10">
-            <p>{nickname}</p>
-            <p>Rating: {rating} </p>
-            <p>Room ID: {roomId}</p>
-          </div>
-          <div className="flex items-center justify-center text-white gap-4 pb-28">
-            <p>Room Price: ${roomPrice}</p>
+          <div className="flex flex-col pl-4 items-left gap-4 text-pink-300 pt-10">
             <p>
-              Status:{" "}
+              Nickname: <span className="text-white">{nickname}</span>
+            </p>
+            <p>
+              Rating: <span className="text-white">{rating}</span>{" "}
+            </p>
+            <p>
+              Room ID: <span className="text-white">{roomId}</span>
+            </p>
+
+            <p>
+              Room Price: <span className="text-white">$ {roomPrice}</span>
+            </p>
+            <p>
+              Status: {""}
               <span
                 className={cn(
                   status === "ONLINE" ? "text-green-500" : "text-red-500"

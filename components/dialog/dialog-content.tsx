@@ -17,7 +17,8 @@ export const DialogContent = forwardRef<HTMLDivElement, PropsType>(
         <DialogPrimitive.Portal>
           <DialogPrimitive.Overlay
             className={cn(
-              "data-[state=open]:animate-overlayShow data-[state=closed]:animate-overlayHide"
+              // "data-[state=open]:animate-overlayShow data-[state=closed]:animate-overlayHide w-screen bg-white z-30"
+              "w-screen h-screen z-30 fixed top-0 right-0 left-0 bottom-0 backdrop-blur-sm bg-black/30"
             )}
           />
 
@@ -27,7 +28,7 @@ export const DialogContent = forwardRef<HTMLDivElement, PropsType>(
             onEscapeKeyDown={() => setActive(false)}
             onInteractOutside={() => setActive(false)}
             className={cn(
-              "data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-26 w-96 right-0 bg-info-host rounded-md"
+              "data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide z-40 fixed top-0 w-96 h-screen right-0 bg-main-bg border-l-2 border-gray-900 b rounded-md"
             )}
           >
             <DialogPrimitive.DialogTitle className="hidden">
@@ -38,7 +39,7 @@ export const DialogContent = forwardRef<HTMLDivElement, PropsType>(
               aria-label="Close"
               onClick={() => setActive(false)}
               className={cn(
-                "absolute top-2 size-4 left-2 z-40 text-white hover:text-gray-800"
+                "absolute top-2 size-4 left-2 z-60 text-white hover:text-gray-800"
               )}
             >
               <Cross1Icon className="size-9 font-bold" />
