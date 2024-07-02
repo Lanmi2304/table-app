@@ -22,7 +22,6 @@ const LoadingRow = () => (
     </td>
   </tr>
 );
-const queryClient = new QueryClient();
 
 export function Table() {
   const { setActive, setHost } = useContext(AsideCTX);
@@ -51,58 +50,51 @@ export function Table() {
   return (
     <>
       <div className="h-10"></div>
-      <div className="relative w-[50dvw] mx-auto">
-        <table
+
+      <table
+        className={cn(
+          "w-[50dvw] mx-auto mb-9 text-white bg-table-data text-sm rounded-xl overflow-hidden"
+        )}
+      >
+        <thead
           className={cn(
-            "absolute w-full text-white bg-table-data rounded-md text-[10px]"
+            "sticky top-0 text-table-h-text bg-table-h truncate text-left"
           )}
         >
-          <thead
-            className={cn(
-              "sticky top-0 text-table-h-text bg-table-h truncate text-left"
-            )}
-          >
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id} className="p-2">
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </th>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} className="p-2">
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody className="">
+          {isFetching ? (
+            <LoadingRow />
+          ) : (
+            table.getRowModel().rows.map((row) => (
+              <tr key={row.id} onClick={() => hostPreviewHandler(row.original)}>
+                {row.getVisibleCells().map((cell) => (
+                  <td
+                    key={cell.id}
+                    className="text-left h-6 border-b-2 border-b-slate-800 p-2"
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
                 ))}
               </tr>
-            ))}
-          </thead>
-          <tbody className="">
-            {isFetching ? (
-              <LoadingRow />
-            ) : (
-              table.getRowModel().rows.map((row) => (
-                <tr
-                  key={row.id}
-                  onClick={() => hostPreviewHandler(row.original)}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <td
-                      key={cell.id}
-                      className="text-left h-6 border-b-2 border-b-slate-800 p-2"
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+            ))
+          )}
+        </tbody>
+      </table>
     </>
   );
 }
