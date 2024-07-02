@@ -18,7 +18,7 @@ const config: Config = {
       ...require("tailwindcss/colors"),
       "table-h": "#18181b",
       "table-h-text": "#d0d0d0",
-      "table-data": "#211f1f",
+      "table-data": "#18181b",
       "info-host": "#161515",
     },
     keyframes: {

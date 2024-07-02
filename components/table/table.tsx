@@ -25,20 +25,20 @@ const LoadingRow = () => (
 const queryClient = new QueryClient();
 
 export function Table() {
-  const [initData, setInitData] = useState<User[]>([]);
   const { setActive, setHost } = useContext(AsideCTX);
+
+  const fetchGroups = (): Promise<User[]> =>
+    axios
+      .get("https://cam-kitty.vercel.app/api/admin/hosts")
+      .then((response) => response.data.data);
 
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["hosts"],
-    queryFn: () => {
-      axios.get("https://cam-kitty.vercel.app/api/admin/hosts").then((res) => {
-        setInitData(res.data.data);
-      });
-    },
+    queryFn: fetchGroups,
   });
 
   const table = useReactTable({
-    data: initData,
+    data: data ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -51,15 +51,21 @@ export function Table() {
   return (
     <>
       <div className="h-10"></div>
-      <div className="relative w-[80dvw] mx-auto">
+      <div className="relative w-[50dvw] mx-auto">
         <table
-          className={cn("absolute w-full text-white bg-table-data rounded-md ")}
+          className={cn(
+            "absolute w-full text-white bg-table-data rounded-md text-[10px]"
+          )}
         >
-          <thead className={cn("sticky top-0 text-table-h-text bg-table-h")}>
+          <thead
+            className={cn(
+              "sticky top-0 text-table-h-text bg-table-h truncate text-left"
+            )}
+          >
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
+                  <th key={header.id} className="p-2">
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -71,7 +77,7 @@ export function Table() {
               </tr>
             ))}
           </thead>
-          <tbody>
+          <tbody className="">
             {isFetching ? (
               <LoadingRow />
             ) : (
@@ -81,7 +87,10 @@ export function Table() {
                   onClick={() => hostPreviewHandler(row.original)}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className={cn("text-center")}>
+                    <td
+                      key={cell.id}
+                      className="text-left h-6 border-b-2 border-b-slate-800 p-2"
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

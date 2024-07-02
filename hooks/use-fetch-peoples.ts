@@ -18,15 +18,15 @@ export type User = {
   roomPrice: string;
 };
 
-export function useFetch() {
-  const { isPending, error, data, isFetching } = useQuery({
-    queryKey: ["repoData"],
-    queryFn: () => {
-      axios.get("https://cam-kitty.vercel.app/api/admin/hosts").then((res) => {
-        console.log(res.data);
-        return res.data;
-      });
-    },
-  });
-  return { isPending, error, newData: data, isFetching };
-}
+// export function useFetch() {
+//   const { isPending, error, data, isFetching } = useQuery({
+//     queryKey: ["repoData"],
+//     queryFn: () => {
+//       axios.get("https://cam-kitty.vercel.app/api/admin/hosts").then((res) => {
+//         console.log(res.data);
+//         return res.data;
+//       });
+//     },
+//   });
+//   return { isPending, error, newData: data, isFetching };
+// }
