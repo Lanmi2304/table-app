@@ -7,6 +7,7 @@ import Aside from "@/components/aside/aside";
 import Header from "@/components/header/header";
 import Navigation from "@/components/table/navigation";
 import type { Viewport } from "next";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Toaster richColors theme="dark" />
+
         <Header />
         <Navigation />
         <div className="flex flex-row">
