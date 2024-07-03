@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
-import { createContext, ReactNode, useState } from "react";
-import { User } from "@/hooks/use-fetch-peoples";
+import { type ReactNode, createContext, useState } from 'react';
 
-type CTXValueType = {
+import { type User } from '@/hooks/use-fetch-peoples';
+
+interface CTXValueType {
   showAside: boolean;
   setActive: (active: boolean) => void;
   setHost: (host: User) => void;
   selectedHost: User | undefined;
-};
+}
 
 export const AsideCTX = createContext<CTXValueType>({
   showAside: false,
@@ -31,7 +32,7 @@ export default function AsideCTXProvider({
 
   const setHost = (host: User) => {
     setSelectedHost(host);
-    console.log(host);
+    // console.log(host);
   };
 
   const ctxValue: CTXValueType = {

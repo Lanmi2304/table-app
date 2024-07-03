@@ -1,20 +1,20 @@
-import { createColumnHelper } from "@tanstack/react-table";
-import { type User } from "@/hooks/use-fetch-peoples";
-import { cn } from "@/lib/utils";
-import Avatar from "@/components/ui/avatar";
-import HoverCardComponent from "../ui/hover-card";
-import TooltipDemo from "../ui/tooltip";
+import { createColumnHelper } from '@tanstack/react-table';
+
+import Avatar from '@/components/ui/avatar';
+import TooltipDemo from '@/components/ui/tooltip';
+import { type User } from '@/hooks/use-fetch-peoples';
+import { cn } from '@/lib/utils';
 
 const columnHelper = createColumnHelper<User>();
 
 export const columns = [
-  columnHelper.accessor("id", {
-    header: "User ID",
+  columnHelper.accessor('id', {
+    header: 'User ID',
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor((row) => row.nickname, {
-    id: "nickname",
-    header: "Nickname",
+    id: 'nickname',
+    header: 'Nickname',
     cell: (info) => (
       <div className="flex items-center gap-2">
         <Avatar image={info.row.original.image} />
@@ -22,12 +22,12 @@ export const columns = [
       </div>
     ),
   }),
-  columnHelper.accessor("rating", {
-    header: "Rating",
+  columnHelper.accessor('rating', {
+    header: 'Rating',
 
     cell: (info) => (
       <TooltipDemo data={info.row.original}>
-        <span className="flex gap-1 items-center">
+        <span className="flex items-center gap-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 576 512"
@@ -40,26 +40,27 @@ export const columns = [
       </TooltipDemo>
     ),
   }),
-  columnHelper.accessor("guestsCount", {
-    header: "Guests",
+  columnHelper.accessor('guestsCount', {
+    header: 'Guests',
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor("roomId", {
-    header: "Room Id",
+  columnHelper.accessor('roomId', {
+    header: 'Room Id',
     cell: (info) => <span># {info.getValue()}</span>,
   }),
-  columnHelper.accessor("roomPrice", {
-    header: "Room Price",
+  columnHelper.accessor('roomPrice', {
+    header: 'Room Price',
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor("status", {
-    header: "Status",
+  columnHelper.accessor('status', {
+    header: 'Status',
     cell: (info) => (
       <span
         className={cn(
-          info.getValue() === "ONLINE"
-            ? "text-online-color py-1 px-2 bg-green-950 rounded-xl border border-green-800 font-bold"
-            : "text-blue-600 p-1 bg-blue-950 rounded-xl border-2 border-blue-800"
+          'rounded-xl border p-2',
+          info.getValue() === 'ONLINE'
+            ? 'border-green-800 bg-green-950 font-bold text-online-color'
+            : 'border-blue-800 bg-blue-950 text-blue-600',
         )}
       >
         {info.getValue().slice(0, 1).toUpperCase() +
@@ -67,17 +68,17 @@ export const columns = [
       </span>
     ),
   }),
-  columnHelper.accessor("isToyOnline", {
-    header: "Toy Online",
+  columnHelper.accessor('isToyOnline', {
+    header: 'Toy Online',
     cell: (info) => (
       <span
         className={cn(
-          info.getValue() === true
-            ? "text-online-color py-1 px-2 bg-green-950 rounded-xl border border-green-800 font-bold"
-            : "text-red-400 py-1 px-2 bg-toy-off-bg rounded-xl border border-red-800 font-bold"
+          info.getValue()
+            ? 'rounded-xl border border-green-800 bg-green-950 px-2 py-1 font-bold text-online-color'
+            : 'rounded-xl border border-red-800 bg-toy-off-bg px-2 py-1 font-bold text-red-400',
         )}
       >
-        {info.getValue() === true ? "Yes" : "No"}
+        {info.getValue() ? 'Yes' : 'No'}
       </span>
     ),
   }),

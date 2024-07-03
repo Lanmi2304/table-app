@@ -1,10 +1,11 @@
-"use client";
-import { DialogComponent } from "@/components/dialog/dialog";
-import Navigation from "@/components/table/navigation";
-import { Table } from "@/components/table/table";
-import { AsideCTX } from "@/context/table-ctx";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useContext } from "react";
+'use client';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useContext } from 'react';
+
+import { DialogComponent } from '@/components/dialog/dialog';
+import { Table } from '@/components/table/table';
+import { AsideCTX } from '@/context/table-ctx';
 
 const queryClient = new QueryClient();
 

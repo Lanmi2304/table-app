@@ -1,40 +1,37 @@
-import { cn } from "@/lib/utils";
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { type ButtonHTMLAttributes, type ReactNode } from 'react';
+
+import { cn } from '@/lib/utils';
 
 type ButtonProps = {
   children: ReactNode;
   className?: string;
   position?:
-    | "top-left"
-    | "top-center"
-    | "top-right"
-    | "bottom-left"
-    | "bottom-center"
-    | "bottom-right";
+    | 'top-left'
+    | 'top-center'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-center'
+    | 'bottom-right';
 
   type?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function Button({
   children,
-  position = "bottom-right",
+  position = 'bottom-right',
   className,
   type,
   ...props
 }: ButtonProps) {
   return (
-    <>
-      {/* <Toaster richColors theme="dark" position={position} /> */}
-      <button
-        className={cn(
-          "border border-slate-400 text-white px-4 py-2 rounded-xl",
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </button>
-      ;
-    </>
+    <button
+      className={cn(
+        'rounded-xl border border-slate-400 px-4 py-2 text-white',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </button>
   );
 }

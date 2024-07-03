@@ -1,7 +1,6 @@
-import { FAQs } from "@/FAQ/faqs";
-import AccordionFAQ from "@/components/faq/faq";
-import HoverCardTool from "@/components/ui/tooltip";
-import "react-tooltip/dist/react-tooltip.css";
+import AccordionFAQ from '@/components/faq/faq';
+import { FAQs } from '@/config/faqs.config';
+import 'react-tooltip/dist/react-tooltip.css';
 
 export default function Home() {
   return (
