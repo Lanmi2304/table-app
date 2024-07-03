@@ -11,7 +11,7 @@ export const DialogComponent = ({ host }: { host: User | undefined }) => {
   if (!host) return;
 
   const { nickname, image, rating, roomId, roomPrice, status } = host;
-
+  // Set open to showSide
   return (
     <Dialog open={false}>
       <DialogTrigger className={cn("hidden")}>Dialog trigger</DialogTrigger>

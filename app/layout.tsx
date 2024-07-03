@@ -6,8 +6,18 @@ import AsideCTXProvider from "@/context/table-ctx";
 import Aside from "@/components/aside/aside";
 import Header from "@/components/header/header";
 import Navigation from "@/components/table/navigation";
+import type { Viewport } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  // Also supported by less commonly used
+  // interactiveWidget: 'resizes-visual',
+};
 
 export const metadata: Metadata = {
   title: "Create Next App",

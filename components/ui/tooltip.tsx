@@ -38,6 +38,8 @@ const TooltipDemo = ({
 
     return () => window.removeEventListener("resize", resizeFN);
   }, [currWid, isMd]);
+
+  // console.log(currWid);
   return (
     <Tooltip.Provider delayDuration={100}>
       <Tooltip.Root onOpenChange={setIsOpen} open={isOpen}>
