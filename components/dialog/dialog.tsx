@@ -13,7 +13,7 @@ export const DialogComponent = ({ host }: { host: User | undefined }) => {
   const { nickname, image, rating, roomId, roomPrice, status } = host;
 
   return (
-    <Dialog open={showAside}>
+    <Dialog open={false}>
       <DialogTrigger className={cn("hidden")}>Dialog trigger</DialogTrigger>
       <DialogContent label="About host">
         <div className="h-screen">
