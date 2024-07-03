@@ -6,16 +6,15 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { columns } from "./columns";
 import { cn } from "@/lib/utils";
-// import { useFetch } from "@/hooks/use-fetch-peoples";
 import { type User } from "@/hooks/use-fetch-peoples";
 import { AsideCTX } from "@/context/table-ctx";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import axios from "axios";
+import ky from "ky";
 
 const LoadingRow = () => (
   <tr>
@@ -32,10 +31,13 @@ export function Table() {
     pageSize: 10,
   });
 
-  const fetchGroups = (): Promise<User[]> =>
-    axios
+  const fetchGroups = async (): Promise<User[]> => {
+    const resData: { data: []; message: string; success: boolean } = await ky
       .get("https://cam-kitty.vercel.app/api/admin/hosts")
-      .then((response) => response.data.data);
+      .json();
+
+    return resData.data;
+  };
 
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["hosts"],
@@ -63,7 +65,7 @@ export function Table() {
       <div className="rounded-2xl mt-60 mb-20">
         <table
           className={cn(
-            "w-[50dvw] mx-auto staic text-white bg-table-data text-sm rounded-xl"
+            "w-[70dvw] mx-auto staic text-white bg-table-data text-sm rounded-xl"
           )}
         >
           <thead
@@ -97,7 +99,7 @@ export function Table() {
                   onClick={() => hostPreviewHandler(row.original)}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="text-left p-2 ">
+                    <td key={cell.id} className="text-left p-2">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -110,20 +112,6 @@ export function Table() {
           </tbody>
         </table>
       </div>
-
-      <select
-        className="mb-20"
-        value={table.getState().pagination.pageSize}
-        onChange={(e) => {
-          table.setPageSize(Number(e.target.value));
-        }}
-      >
-        {[10, 20, 30, 40, 50, 100].map((pageSize) => (
-          <option key={pageSize} value={pageSize}>
-            Show {pageSize}
-          </option>
-        ))}
-      </select>
     </>
   );
 }

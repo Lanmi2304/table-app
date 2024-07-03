@@ -1,22 +1,25 @@
 import Link from "next/link";
 import { House, UsersRound, Table } from "lucide-react";
 
-const navLinks = [
+export const navLinks = [
   {
     text: "Home",
     path: "/",
     icon: <House />,
   },
   { text: "Table", path: "/host-table", icon: <Table /> },
-  { text: "Users", path: "/", icon: <UsersRound /> },
+  { text: "Users", path: "/users", icon: <UsersRound /> },
 ];
 
 export default function Aside() {
   return (
-    <aside className="fixed top-14 w-[10%] h-screen bg-main-bg border-r-2 border-gray-900">
+    <aside className="hidden sm:block sm:fixed sm:top-14 sm:w-[10%] sm:h-screen bg-main-bg border-r-2 border-gray-900">
       <ul className="w-full">
         {navLinks.map((link) => (
-          <li key={link.text} className="text-left pl-8 first:mt-20 mt-4">
+          <li
+            key={link.text}
+            className="text-left pl-6 first:mt-20 mt-4 text-lg font-semibold"
+          >
             <Link
               href={link.path}
               className="text-white w-[10%] flex gap-2 hover:text-pink-500"

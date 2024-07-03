@@ -19,6 +19,7 @@ const config: Config = {
     },
     colors: {
       ...require("tailwindcss/colors"),
+
       "table-h": "#18181b",
       "table-h-text": "#d0d0d0",
       "table-data": "#18181b",
@@ -27,7 +28,13 @@ const config: Config = {
       "main-bg": "#09090b;",
       "online-color": "#12b981",
       "toy-off-bg": "#2f1d20",
+
+      // Accordion
+      "accordion-content-bg": "#101012",
     },
+
+    // Accordion
+
     keyframes: {
       overlayShow: {
         from: { opacity: "0" },
@@ -45,12 +52,26 @@ const config: Config = {
         from: { opacity: "1", transform: "translate(0, 0) scale(1)" },
         to: { opacity: "0", transform: "translate(100%, 0) scale(0.96)" },
       },
+
+      //Accordion
+      slideDown: {
+        from: { height: "0px" },
+        to: { height: "var(--radix-accordion-content-height)" },
+      },
+      slideUp: {
+        from: { height: "var(--radix-accordion-content-height)" },
+        to: { height: "0px" },
+      },
     },
     animation: {
       overlayShow: "overlayShow 500ms",
       overlayHide: "overlayHide 500ms",
       contentShow: "contentShow 500ms",
       contentHide: "contentHide 500ms",
+
+      //Accordion
+      slideDown: "slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)",
+      slideUp: "slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)",
     },
   },
   plugins: [],

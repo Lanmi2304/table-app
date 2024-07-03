@@ -5,6 +5,7 @@ import AsideCTXProvider from "@/context/table-ctx";
 
 import Aside from "@/components/aside/aside";
 import Header from "@/components/header/header";
+import Navigation from "@/components/table/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,11 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
+        <Navigation />
         <div className="flex flex-row">
-          <div className="basis-[10%]">
+          <div className="sm:basis-[10%]">
             <Aside />
           </div>
-          <div className="flex basis-[90%] shrink flex-col items-center justify-center static">
+          <div className="flex sm:basis-[90%] shrink flex-col items-center justify-center static">
             <AsideCTXProvider>{children}</AsideCTXProvider>
           </div>
         </div>
