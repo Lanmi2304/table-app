@@ -24,6 +24,7 @@ const TooltipDemo = ({
   const { image, nickname, guestsCount } = data;
 
   useEffect(() => {
+    if (currWid < 640) setIsMd(true);
     const resizeFN = () => {
       setCurrWid(window.innerWidth);
       if (currWid < 640) {
